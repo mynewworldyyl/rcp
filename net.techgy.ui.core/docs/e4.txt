@@ -1,0 +1,63 @@
+EModelService: model Service service
+IWorkbench : instance of e4 workbench service
+ContextInjectionFactory: static method for injection, inject object for e3 composite or dialog
+ImageRegistry 图片注册表, service
+
+Bundle b = FrameworkUtil.getBundle(getClass());
+
+IEventBroker: 系统事件监听器
+
+UISynchronize: 系统UI线程同步器
+
+//在UI线程中接收事件
+@Inject
+void eventReceived(@UIEventTopic("viewcommunication/*") Date date) {
+  viewer.add(date);
+}
+
+
+EPartService
+
+
+@Execute
+public void execute(EPartService partService, MApplication application,
+        EModelService modelService) {
+    MPart part = MBasicFactory.INSTANCE.createPart();
+    part.setLabel("New Part");
+    part.setContributionURI("platform:/plugin/de.vogella.e4.modelservice/de.vogella.e4.modelservice.part.NewPart");
+     List<MPartStack> stacks = modelService.findElements(application, null,
+            MPartStack.class, null);
+     stacks.get(0).getChildren().add(part);
+     partService.showPart(part, PartState.ACTIVATE);
+}
+
+
+
+
+==============================================================
+
+创建Part
+IPresentationEngine renderer = (IPresentationEngine)context.get( IPresentationEngine.class.getName() );
+MApplicationFactory factory = ApplicationFactoryImpl.init();
+MPart view = factory.createPart();
+view.setLabel( "TestView" );
+
+view.setURI( "platform:/plugin/de.sampleapp.client/" + ViewContainer.class.getName() );
+                
+MUIElement tableStack = ( MUIElement ) context.get( "tableStack" ); // tableStack is the id of the PartStack where the new part should be shown
+view.setParent( (MElementContainer<MUIElement>) tableStack );
+                
+renderer.createGui( view );
+        
+ETabFolder w = (ETabFolder) ((MPartStack) tableStack).getWidget();
+w.setSelection( w.getItemCount() - 1 );
+        
+Bundle bundle = Activator.getDefault().getBundle();
+ViewContainer viewContainer = (ViewContainer)view.getObject();
+ITestView testView;
+testView = (ITestView)bundle.loadClass( "de.sampleapp.client.TestView" ).newInstance();
+testView.setInput( partInput );
+        
+viewContainer.setViewPart( testView );
+
+==============================================================

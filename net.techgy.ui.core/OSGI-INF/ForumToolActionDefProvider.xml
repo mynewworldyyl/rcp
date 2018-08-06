@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+name="net.cmty.ui.core.forum.ForumToolActionDefProvider">
+   <implementation class="net.cmty.ui.core.forum.ForumToolActionDefProvider"/>
+   <service>
+      <provide interface="net.techgy.ui.core.toolbar.IToolActionDefProvider"/>
+   </service>
+</scr:component>

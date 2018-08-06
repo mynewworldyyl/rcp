@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="net.techgy.ui">
+            
+            <property
+               name="appName"
+               value="net.techgy.ui">
+         </property>
+         <property
+               name="applicationXMI"
+               value="platform:/plugin/net.techgy.ui/Application.e4xmi">
+         </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://net.techgy.ui/net.techgy.ui.core.utils.LifeCycleManager">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
+
+   <extension
+         id="com.cmty.e3.ui.application"
+         name="CMTY System"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="com.cmty.e3.ui.Application">
+         </run>
+      </application>
+   </extension>
+   

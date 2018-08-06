@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+name="net.techgy.cmty.ui.preference.internal.PreferencePanelProvider">
+   <implementation class="net.techgy.cmty.ui.preference.internal.PreferencePanelProvider"/>
+   <service>
+      <provide interface="net.techgy.ui.core.content.IPanelProvider"/>
+   </service>
+</scr:component>

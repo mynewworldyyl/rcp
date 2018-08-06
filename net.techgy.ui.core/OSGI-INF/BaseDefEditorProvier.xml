@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+name="net.cmty.ui.core.editor.BaseDefEditorProvier">
+   <implementation class="net.cmty.ui.core.editor.BaseDefEditorProvier"/>
+   <service>
+      <provide interface="net.cmty.ui.core.editor.IEditorProvider"/>
+   </service>
+</scr:component>

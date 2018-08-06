@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_G4L-AA9iEea8Ts0jSEW3fA">
+  <imports xsi:type="commands:Command" xmi:id="_G4L-AQ9iEea8Ts0jSEW3fA" elementId="net.techgy.ui.cmtyworkbench.openmainmenu" commandName="OpenMainMenu"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_G4L-Ag9iEea8Ts0jSEW3fA" featurename="handlers" parentElementId="net.techgy.ui.perspective.sample">
+    <elements xsi:type="commands:Handler" xmi:id="_G4L-Aw9iEea8Ts0jSEW3fA" elementId="net.techgy.ui.handler.0" contributionURI="bundleclass://net.techgy.ui/net.techgy.cmty.ui.actions.OpenMainViewHandler" command="_G4L-AQ9iEea8Ts0jSEW3fA"/>
+  </fragments>
+</fragment:ModelFragments>

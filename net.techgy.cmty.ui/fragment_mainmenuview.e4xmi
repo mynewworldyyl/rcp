@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_-HxH0BA-Eea8Ts0jSEW3fA">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_-HxH0RA-Eea8Ts0jSEW3fA" featurename="children" parentElementId="net.techgy.ui.partstack.leftpart" positionInList="first">
+    <elements xsi:type="basic:Part" xmi:id="_-HxH0hA-Eea8Ts0jSEW3fA" elementId="net.techgy.ui.cmtymainmenu" contributionURI="bundleclass://net.techgy.ui/net.techgy.cmty.ui.views.MainMenuViewPart" label="CmtyMainMenuView"/>
+  </fragments>
+</fragment:ModelFragments>

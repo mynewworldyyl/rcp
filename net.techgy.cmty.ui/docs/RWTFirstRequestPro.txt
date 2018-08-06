@@ -1,0 +1,26 @@
+RWTServlet--
+    doGet --> handleRequest --> handleValidRequest(
+                                              a. 创建ServiceContext实例，并附到当前线程实例（ThreadLocal）我中; 
+                                              b. 从ServiceManager中取得LifeCycleServiceHandler实例，并交由其处理;
+                                              c. ServiceManager管理多个ServiceHandler实例，ServiceManager从当前HttpRequest中取以servicehandler为KEY的值，若为NULL，则使用默认LifeCycleServiceHandler实例处理；
+                                              )
+LifeCycleServiceHandler--
+   service --> 同步synchronizedService --> (
+                                         a. 若为post请求，中间发起的所有请求都是post请求，由RWT核心处理；
+                                         b. 若为get请求，则对应于第一次请求，加载首页内容，库，CSS，标题等等;    
+                                            -->handleGetRequest-->(
+                                                    a. 若是WebClient,则返回HTML页面，rwt-index.html为RWT默认首页HTML文件
+                                                        --> StartupPage -- 
+                                                        send --> setResponseHeaders
+                                                             --> StartupPageTemplate --> writePage --> VariableWriter实例写入各种库文件，如JS，CSS。
+                                                             
+                                                    b. 若是其他，测返回纯Json格式数据；
+                                                    
+                                                    c. 在StartupPage中有职下代码 
+                                                         public void setClientJsLibrary( String location )设置主库，rap-client.js
+                                                         public void addJsLibrary( String location )  设置第三方库，
+                                                    d. 在ClientResources为中例出所有加载的JS，RWT自动整合为一个JS文件。若要加载其它定制的JS,也要在此列出。
+                                            ) 
+                                         ) 
+                                        
+                                         

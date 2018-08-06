@@ -1,0 +1,13 @@
+{
+    "id": 0,
+    "namespace": "test",
+    "dataType": "boolean",
+    "desc": "33",
+    "name": "334",
+    "defaultValue": "3",
+    "minValue": 23,
+    "maxValue": 4,
+    "length": 23,
+    "requried": false,
+    "avvos": []
+}

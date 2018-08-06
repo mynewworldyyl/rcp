@@ -1,0 +1,21 @@
+#######################################################
+ON Server side:
+#######################################################
+
+1. Create VO class and annotated with @TableViewEditor or @TreeViewEditor;
+      com.digitnexus.core.masterdata.vo.QualityVo
+      
+2. Create Processor which extends from AbstractPersistenceListener or implements IPersistenceListener directly;
+      com.digitnexus.core.masterdata.QualityProcessor
+	
+3. Add vo to MenuManager
+        subMenu = new Menu("材质",QualityVo.class.getName());
+		mainMenu.addSubMenu(subMenu);
+
+4. Export the vo class to client in MANIFEST.MF file;
+
+
+#######################################################
+ON Client Side:
+#######################################################
+Just need to import the vo class which export from server

@@ -1,0 +1,6 @@
+字节码增强问题，在eclipse中，右键点击项目，在run as--> run Configerations--> 点击右边的argument--> VM arguments,在里面配置 
+-javaagent:D:\EclipseJeeJuno\workspace4jee\apis-oauth2-server\jpa-enhance\spring-instrument-3.2.0.RELEASE.jar
+（把spring-instrument-3.2.0.RELEASE.jar这个jar包配置到项目中去就可以了），
+你到网上找spring-instrument-3.2.0.RELEASE.jar这个包下载下来吧 
+
+mongod -dbpath D:\mongodb

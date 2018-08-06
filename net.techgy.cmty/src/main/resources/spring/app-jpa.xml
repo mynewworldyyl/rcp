@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="  
+                http://www.springframework.org/schema/beans   
+                http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+                http://www.springframework.org/schema/tx   
+                http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  
+                http://www.springframework.org/schema/context  
+                http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+                http://www.springframework.org/schema/util   
+                http://www.springframework.org/schema/util/spring-util-3.1.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="net.techgy, com.digitnexus">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+   
+    <aop:aspectj-autoproxy/>
+
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/properties/config.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean> 
+	
+	<bean id="jpaDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean> 
+	
+	<!-- 
+	jdbc.url=jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 112.117.12.50)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = 112.117.12.51)(PORT = 1521))(LOAD_BALANCE = yes)(FAILOVER = yes))(CONNECT_DATA = (SERVER = DEDICATED)(INSTANCE_ROLE = PRIMARY)(FAILOVER_MODE = (TYPE = SESSION)(METHOD = BASIC))(SERVICE_NAME = test)))
+	 -->
+   <!--  <bean id="jpaDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.10.170)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.10.171)(PORT = 1521))(LOAD_BALANCE = yes)(FAILOVER = yes))(CONNECT_DATA = (SERVER = DEDICATED)(INSTANCE_ROLE = PRIMARY)(FAILOVER_MODE = (TYPE = SESSION)(METHOD = BASIC))(SERVICE_NAME = racdb)))" />
+		<property name="username" value="zj_fw" />
+		<property name="password" value="zj_fw" />
+	</bean> -->
+
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+		
+		<bean
+    class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+ 	<bean id="jpaEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:packagesToScan="net.techgy, com.digitnexus" p:dataSource-ref="jpaDataSource"
+		p:jpaVendorAdapter-ref="hibernateVendor" p:jpaPropertyMap-ref="jpaPropertyMap" /> 
+
+	<util:map id="jpaPropertyMap">
+		 <!-- <entry key="hibernate.hbm2ddl.auto" value="validate" /> -->
+		<entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+         <entry key="hibernate.validator.apply_to_ddl" value="false"/>
+          <entry key="hibernate.validator.autoregister_listeners" value="false"/>
+		<entry key="hibernate.max_fetch_depth" value="4" />
+		<entry key="hibernate.cache.use_second_level_cache" value="false" />
+		<entry key="hibernate.cache.use_query_cache" value="true" />
+		                                                         
+		<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+		
+		<entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider" />
+		 <!-- update,create,validate -->
+		 <entry key="hibernate.hbm2ddl.auto" value="update" />
+		<!-- <entry key="hibernate.cache.use_query_cache" value="false" />
+		<entry key="hibernate.cache.provider_configuration_file_resource_path" value="/ehcache.xml" /> -->
+		
+	</util:map>
+
+	<bean id="hibernateVendor"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:database="MYSQL" p:showSql="true" p:generateDdl="true"
+		p:databasePlatform="org.hibernate.dialect.MySQLDialect" />
+
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="jpaEntityManagerFactory">
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+		<property name="dataSource" ref="jpaDataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="jpaTransactionManager"  proxy-target-class="true"/>
+
+   <!--  <bean class="com.digitnexus.core.osgiservice.impl.ClientServiceImpl"/> -->
+		
+</beans> 

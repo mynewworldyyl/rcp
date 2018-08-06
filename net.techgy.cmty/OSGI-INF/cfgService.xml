@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="net.techgy.cfg.ConfigurationService">
+   <implementation class="net.techgy.cfg.ConfigurationService"/>
+   <service>
+      <provide interface="org.osgi.service.cm.ManagedService"/>
+   </service>
+   <property name="service.pid" type="String" value="net.cmty.cfg.ConfigurationService"/>
+</scr:component>
